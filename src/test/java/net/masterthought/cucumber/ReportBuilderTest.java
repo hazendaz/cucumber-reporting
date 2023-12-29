@@ -7,7 +7,9 @@ import static org.assertj.core.api.Assertions.fail;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,6 +18,7 @@ import java.util.List;
 
 import net.masterthought.cucumber.generators.OverviewReport;
 import net.masterthought.cucumber.json.Feature;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,8 +43,7 @@ class ReportBuilderTest extends ReportGenerator {
 
         // refresh the file if it was already copied by another/previous test
         trendsFileTmp = new File(reportDirectory, "trends-tmp.json");
-
-        FileUtils.copyFile(TRENDS_FILE, trendsFileTmp);
+        Files.copy(TRENDS_FILE.toPath(), trendsFileTmp.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
     @Test

@@ -10,6 +10,8 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -26,7 +28,6 @@ import net.masterthought.cucumber.generators.TagsOverviewPage;
 import net.masterthought.cucumber.generators.TrendsOverviewPage;
 import net.masterthought.cucumber.json.Feature;
 import net.masterthought.cucumber.json.support.TagObject;
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -158,8 +159,8 @@ public class ReportBuilder {
             File tempFile = createTempFile(resourceLocation, resource);
             // don't change this implementation unless you verified it works on Jenkins
             try {
-                FileUtils.copyInputStreamToFile(
-                        this.getClass().getResourceAsStream("/" + resourceLocation + "/" + resource), tempFile);
+                Files.copy(
+                        this.getClass().getResourceAsStream("/" + resourceLocation + "/" + resource), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 // based on FileUtils implementation, should never happen even is declared
                 throw new ValidationException(e);
@@ -171,7 +172,7 @@ public class ReportBuilder {
         File tempFile = createTempFile(resourceLocation, srcFile.getName());
 
         try {
-            FileUtils.copyFile(srcFile, tempFile);
+            Files.copy(srcFile.toPath(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (FileNotFoundException e) {
             LOG.warn("File not found: {}", srcFile.getAbsolutePath());
             LOG.debug("", e);

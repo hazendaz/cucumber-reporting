@@ -2,12 +2,14 @@ package net.masterthought.cucumber.generators;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import net.masterthought.cucumber.ReportBuilder;
 import net.masterthought.cucumber.ReportResult;
 import net.masterthought.cucumber.Trends;
 import net.masterthought.cucumber.generators.integrations.PageTest;
-import org.apache.commons.io.FileUtils;
 import org.apache.velocity.VelocityContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +29,7 @@ class TrendsOverviewPageTest extends PageTest {
     void setUp() throws IOException {
         setUpWithJson(SAMPLE_JSON);
         // refresh the file if it was already copied by another/previous test
-        FileUtils.copyFile(new File(TRENDS_FILE), new File(TRENDS_TMP_FILE));
+        Files.copy(Paths.get(TRENDS_FILE), Paths.get(TRENDS_TMP_FILE), StandardCopyOption.REPLACE_EXISTING);
     }
 
     @Test
