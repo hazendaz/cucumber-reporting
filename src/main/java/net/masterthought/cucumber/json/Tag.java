@@ -32,6 +32,6 @@ public class Tag {
     @Override
     public boolean equals(Object tag) {
         // not fully implemented but I don't expect to have different objects here
-        return ((Tag) tag).name.equals(name);
+        return name != null && ((Tag) tag).name.equals(name);
     }
 }

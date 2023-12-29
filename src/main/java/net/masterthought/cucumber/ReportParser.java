@@ -69,7 +69,7 @@ public class ReportParser {
                 continue;
             }
             Feature[] features = parseForFeature(jsonFile);
-            LOG.info("File '{}' contains {} feature(s)", jsonFile, features.length);
+            LOG.info("File '{}' contains {} feature(s)", jsonFile, features == null ? "null" : features.length);
             featureResults.addAll(Arrays.asList(features));
         }
 

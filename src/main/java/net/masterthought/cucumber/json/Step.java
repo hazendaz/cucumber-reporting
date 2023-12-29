@@ -64,7 +64,7 @@ public class Step implements Resultsable {
 
     public String getKeyword() {
         // step keywords have additional space at the end of string, while others don't
-        return keyword.trim();
+        return keyword == null ? keyword : keyword.trim();
     }
 
     public Integer getLine() {

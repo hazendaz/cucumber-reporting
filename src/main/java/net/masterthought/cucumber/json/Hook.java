@@ -50,7 +50,7 @@ public class Hook implements Resultsable {
             // assuming that if the embedding exists then it is not empty
             return true;
         }
-        if (StringUtils.isNotBlank(result.getErrorMessage())) {
+        if (result != null && StringUtils.isNotBlank(result.getErrorMessage())) {
             return true;
         }
         // TODO: hook with 'output' should be treated as empty or not?
