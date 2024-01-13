@@ -57,15 +57,13 @@ final class ReportFeatureWithRetestMerger implements ReportFeatureMerger {
                 if (indexOfPreviousResult < 0) {
                     feature.addElements(
                             hasBackground ?
-                                    new Element[]{elements[i - 1], current} :
-                                    new Element[]{current}
+                                    new Element[] {elements[i - 1], current} :
+                                    new Element[] {current}
                     );
-                } else {
-                    if (replaceIfExists(feature.getElements()[indexOfPreviousResult], current)) {
-                        feature.getElements()[indexOfPreviousResult] = current;
-                        if (hasBackground && isBackground(indexOfPreviousResult - 1, feature.getElements())) {
-                            feature.getElements()[indexOfPreviousResult - 1] = elements[i - 1];
-                        }
+                } else if (replaceIfExists(feature.getElements()[indexOfPreviousResult], current)) {
+                    feature.getElements()[indexOfPreviousResult] = current;
+                    if (hasBackground && isBackground(indexOfPreviousResult - 1, feature.getElements())) {
+                        feature.getElements()[indexOfPreviousResult - 1] = elements[i - 1];
                     }
                 }
             }
