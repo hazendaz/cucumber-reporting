@@ -6,7 +6,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import net.masterthought.cucumber.json.support.Argument;
 
-public class StepNameFormatter {
+public final class StepNameFormatter {
+
+    private StepNameFormatter() {
+        // Prevent instantiation
+    }
 
     public static final StepNameFormatter INSTANCE = new StepNameFormatter();
 
