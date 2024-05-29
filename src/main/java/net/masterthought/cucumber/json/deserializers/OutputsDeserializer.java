@@ -1,6 +1,5 @@
 package net.masterthought.cucumber.json.deserializers;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import net.masterthought.cucumber.json.Output;
 public class OutputsDeserializer extends CucumberJsonDeserializer<Output[]> {
 
     @Override
-    protected Output[] deserialize(JsonNode rootNode, Configuration configuration) throws IOException {
+    protected Output[] deserialize(JsonNode rootNode, Configuration configuration) {
         List<Output> outputs = new ArrayList<>();
         if (rootNode.get(0).isArray()) {
             for (JsonNode outputNode : rootNode) {
